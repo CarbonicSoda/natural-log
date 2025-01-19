@@ -19,9 +19,8 @@ export namespace natlog {
 
 		logBanner.appendChild(content);
 		promptArea.appendChild(logBanner);
-		setTimeout(() => {
-			logBanner.classList.add("show");
-		}, 50);
+		if (promptArea.childNodes.length > 6) promptArea.removeChild(promptArea.childNodes[0]);
+		requestAnimationFrame(() => requestAnimationFrame(() => logBanner.classList.add("show")));
 
 		const dispose = () => {
 			clearTimeout(timeout);
@@ -55,4 +54,5 @@ document.head.appendChild(injectStyle);
 const promptArea = document.createElement("div");
 promptArea.className = "natlog-injected";
 document.body.appendChild(promptArea);
+
 //#endregion init
