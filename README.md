@@ -1,7 +1,7 @@
 <p align="center">
-	<img src="https://raw.githubusercontent.com/CarbonicSoda/natural-logs/master/media/icon.png" width="100" alt="Natural Logs Icon">
+	<img src="https://raw.githubusercontent.com/CarbonicSoda/natural-log/master/media/icon.png" width="100" alt="Natural Log Icon">
 </p>
-<h3 align="center">Natural Logs</h3>
+<h3 align="center">Natural Log</h3>
 <p align="center">Console and Popups All in One</p>
 
 ---
@@ -12,10 +12,10 @@ Install this package in your project:
 
 ```bash
 # via npm
-npm add natural-logs
+npm add natural-log
 
 # or pnpm
-pnpm add natural-logs
+pnpm add natural-log
 
 # or yarn etc
 ```
@@ -24,7 +24,7 @@ Import the package and initialize:
 
 ```tsx
 // index.tsx
-import { Natlog } from "natural-logs";
+import { Natlog } from "natural-log";
 
 // Refer to the next section for options
 new Natlog({...});
@@ -44,7 +44,7 @@ console.error({
 
 gives you...
 
-![Overview](https://github.com/CarbonicSoda/natural-logs/blob/master/media/demo/overview.png?raw=true)
+![Overview](https://github.com/CarbonicSoda/natural-log/blob/master/media/demo/overview.png?raw=true)
 
 Isn't that cool? Frees our hands from the debug console...! (Though the message
 will still reach the debug console if you like to inspect it there)
@@ -54,7 +54,7 @@ will still reach the debug console if you like to inspect it there)
 
 The popups will fade after some time. To dismiss them, just hover and click.
 
-![Hover&Click](https://github.com/CarbonicSoda/natural-logs/blob/master/media/demo/hover.png?raw=true)
+![Hover&Click](https://github.com/CarbonicSoda/natural-log/blob/master/media/demo/hover.png?raw=true)
 
 The package allows you to store console history, and exposes it to the debug
 console via `natlog.history`.
