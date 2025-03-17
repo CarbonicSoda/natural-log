@@ -1,1 +1,1 @@
-export { Natlog } from "./modules/natural-logs";
+export { Natlog } from "./modules/natural-log";

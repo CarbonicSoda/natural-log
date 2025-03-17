@@ -1,12 +1,12 @@
 {
-	"name": "natural-logs",
+	"name": "natural-log",
 	"author": "CarbonicSoda",
 	"version": "1.0.0",
 	"description": "Console and Popups All in One",
 	"license": "MIT",
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/CarbonicSoda/natural-logs"
+		"url": "https://github.com/CarbonicSoda/natural-log"
 	},
 	"keywords": [
 		"console",
