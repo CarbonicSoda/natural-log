@@ -91,5 +91,5 @@ the debug console lol.
 
 ---
 
-_&emsp;So who told you console hijacking is a bad idea...?_
+_&emsp;So who told you console hijacking is a bad idea...?_  
 _&emsp;&emsp;You thought it's the maths one?_
