@@ -26,9 +26,14 @@ Import the package and initialize:
 // index.tsx
 import { Natlog } from "natural-log";
 
-// Refer to the next section for options
+// Initialize
+new Natlog();
+
+// Or with options
 new Natlog({...});
 ```
+
+Available options are given in [configurations](#options).
 
 Now, the next time console methods are called (even in the debug console), a
 popup will appear on your page!
@@ -69,15 +74,15 @@ All configuration options are given below.
 > All properties have full Typescript autocompletion support and have
 > straightforward values.
 
-| Property        | Description                                                                                                                                                                                                                                                                               | Default                                                                                |
-| --------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
-| _console_       | A boolean or an array of strings defining the log level.<br><br>For instance, `["log", "error"]` will mute all other console methods except `console.log` and `console.error`.<br><br>Toggles all if boolean, on production builds you may set it to `false` to mute all console methods. | `true`                                                                                 |
-| _popup_         | Same as options.console except it configurates popups instead.<br><br>Currently, the only methods supported are `"log"`, `"warn"` and `"error"`, but you may fork and easily add support for new methods in no time.                                                                      | `true`                                                                                 |
-| _maxPopupCount_ | How many popups can be shown on the page at the same time. If exceeds this number, the oldest one present would be removed.                                                                                                                                                               | `5`                                                                                    |
-| _popupTimeout_  | How long a popup would last before fading away, measured in seconds.                                                                                                                                                                                                                      | `30`                                                                                   |
-| _popupSep_      | `"newline"` or `"space"`, decides what to insert between items in the popup.<br><br>Unlike in the console, spaces can make the log ambiguous, thus newlines are recommended.                                                                                                              | `"newline"`                                                                            |
-| _history_       | Toggles console history on or off.<br><br>If on, the console history can be accessed via the debug console variable `natlog.history` (along with some other information) even if console is muted.                                                                                        | `true`                                                                                 |
-| _timeOptions_   | Refer to [Intl.DateTimeFormat](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat), decides how the timestamps in console history are formatted.                                                                                        | `{ hour: "2-digit", minute: "2-digit", second: "2-digit", fractionalSecondDigits: 3 }` |
+| Property        | Description                                                                                                                                                                                                                                                                                                           | Default                                                                                |
+| --------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
+| _console_       | A boolean or an array of strings defining the log level.<br><br>For instance, `["log", "error"]` will mute all other console methods except `console.log` and `console.error`.<br><br>Toggles all if boolean, on production builds you may set it to `false` to mute all console methods.                             | `true`                                                                                 |
+| _popup_         | Same as options.console except it configurates popups instead.<br><br>Currently, the only methods supported are `"log"`, `"warn"` and `"error"`, but you may fork and easily add support for new methods in no time following memos in src/.                                                                          | `true`                                                                                 |
+| _maxPopupCount_ | How many popups can be shown on the page at the same time. If exceeds this number, the oldest one present would be removed.                                                                                                                                                                                           | `5`                                                                                    |
+| _popupTimeout_  | How long a popup would last before fading away, measured in seconds.                                                                                                                                                                                                                                                  | `30`                                                                                   |
+| _popupSep_      | `"newline"` or `"space"`, decides what to insert between items in the popup.<br><br>Unlike in the console, spaces can make the log ambiguous, thus newlines are recommended.                                                                                                                                          | `"newline"`                                                                            |
+| _history_       | Toggles console history on or off.<br><br>If on, the console history can be accessed via the debug console variable `natlog.history` (along with some other information) even if console is muted.<br><br>If you have many console method calls in your code (for whatever reasons?), set to `false` for performance. | `true`                                                                                 |
+| _timeOptions_   | Refer to [Intl.DateTimeFormat](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat), decides how the timestamps in console history are formatted.                                                                                                                    | `{ hour: "2-digit", minute: "2-digit", second: "2-digit", fractionalSecondDigits: 3 }` |
 
 #### End
 
