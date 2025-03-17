@@ -20,7 +20,7 @@ pnpm add natural-logs
 # or yarn etc
 ```
 
-Import the package:
+Import the package and initialize:
 
 ```tsx
 // index.tsx
@@ -52,11 +52,11 @@ will still reach the debug console if you like to inspect it there)
 > The popups are responsive to device size and adaptive to the color scheme
 > (light/dark).
 
-The popups will fade after some time, to dismiss them, just hover and click.
+The popups will fade after some time. To dismiss them, just hover and click.
 
 ![Hover&Click](https://github.com/CarbonicSoda/natural-logs/blob/master/media/demo/hover.png?raw=true)
 
-The package allows you to store console history, and exposed it to the debug
+The package allows you to store console history, and exposes it to the debug
 console via `natlog.history`.
 
 On a production build? Not only can you toggle popups off, you can also mute all
@@ -79,6 +79,8 @@ All configuration options are given below.
 | _history_       | Toggles console history on or off.<br><br>If on, the console history can be accessed via the debug console variable `natlog.history` (along with some other information) even if console is muted.                                                                                        | `true`                                                                                 |
 | _timeOptions_   | Refer to [Intl.DateTimeFormat](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat), decides how the timestamps in console history are formatted.                                                                                        | `{ hour: "2-digit", minute: "2-digit", second: "2-digit", fractionalSecondDigits: 3 }` |
 
+#### End
+
 Sooo... have fun boosting your debugging efficiency!
 
 The main use case is perhaps debugging on phones/tablets without access to the
@@ -89,4 +91,4 @@ the debug console lol.
 
 ---
 
-_&emsp;Who told ya console hijacking is a bad idea...?_
+_&emsp;So who told you console hijacking is a bad idea...?_
