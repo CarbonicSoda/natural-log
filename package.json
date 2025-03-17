@@ -1,17 +1,23 @@
 {
 	"name": "natural-logs",
+	"author": "CarbonicSoda",
 	"version": "1.0.0",
-	"description": "",
+	"description": "All-in-One Console and Popups",
+	"license": "MIT",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/CarbonicSoda/natural-logs"
+	},
+	"keywords": [
+		"console",
+		"log",
+		"popup",
+		"history"
+	],
 	"type": "module",
 	"main": "dist/index.js",
 	"module": "dist/index.esm.js",
 	"types": "dist/types/index.d.ts",
-	"keywords": [],
-	"author": "",
-	"scripts": {
-		"build": "rollup -c",
-		"watch": "rollup -c --watch"
-	},
 	"devDependencies": {
 		"@rollup/plugin-terser": "^0.4.4",
 		"rollup": "^4.35.0",
@@ -19,5 +25,9 @@
 		"rollup-plugin-import-css": "^3.5.8",
 		"rollup-plugin-typescript2": "^0.36.0",
 		"typescript": "^5.8.2"
+	},
+	"scripts": {
+		"build": "rollup -c",
+		"watch": "rollup -c --watch"
 	}
 }
