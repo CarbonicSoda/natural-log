@@ -15,6 +15,17 @@ import { LogItem } from "./log-item";
 import { CssUtils } from "../utils/css";
 
 export class Natlog {
+	//MO REGISTRATION Registration location 2.
+	log(...items: any): void {
+		Natlog.#methodFactory("log")(items);
+	}
+	warn(...items: any): void {
+		Natlog.#methodFactory("warn")(items);
+	}
+	error(...items: any): void {
+		Natlog.#methodFactory("error")(items);
+	}
+
 	static optionDefaults: NatlogOptions = {
 		console: true,
 		popup: true,
@@ -82,17 +93,6 @@ export class Natlog {
 				? (this[<keyof typeof this>method] as (...args: any) => any)
 				: Natlog.$console[method];
 		}
-	}
-
-	//MO REGISTRATION Registration location 2.
-	log(...items: any): void {
-		Natlog.#methodFactory("log")(items);
-	}
-	warn(...items: any): void {
-		Natlog.#methodFactory("warn")(items);
-	}
-	error(...items: any): void {
-		Natlog.#methodFactory("error")(items);
 	}
 
 	static #methodFactory(method: ConsoleMethod): (args: any) => any {
