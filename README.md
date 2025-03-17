@@ -2,7 +2,7 @@
 	<img src="https://raw.githubusercontent.com/CarbonicSoda/natural-logs/master/media/icon.png" width="100" alt="Natural Logs Icon">
 </p>
 <h3 align="center">Natural Logs</h3>
-<p align="center">All-in-One Console and Popups</p>
+<p align="center">Console and Popups All in One</p>
 
 ---
 
@@ -92,3 +92,4 @@ the debug console lol.
 ---
 
 _&emsp;So who told you console hijacking is a bad idea...?_
+_&emsp;&emsp;You thought it's the maths one?_
