@@ -1,0 +1,62 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");
+
+.natlog-injected {
+	all: initial;
+	box-sizing: border-box;
+
+	--ease-duration: 0.2s;
+	--ease-function: ease-out;
+	--font-family: Montserrat, sans-serif;
+
+	z-index: calc(infinity);
+	position: fixed;
+	right: 1vw;
+	bottom: 1vh;
+	display: flex;
+	flex-direction: column;
+
+	& .natlog-popup {
+		--bg-color: #000;
+		--fg-color: #000;
+		--br-color: #000;
+
+		width: 35vw;
+		margin: 0.5rem 0;
+		padding: 0.8rem 1.2rem;
+		border: var(--br-color) 2px solid;
+		border-radius: 10px;
+
+		cursor: pointer;
+
+		opacity: 0;
+		background-color: var(--bg-color);
+
+		transition: opacity var(--ease-duration) var(--ease-function),
+			filter var(--ease-duration) var(--ease-function),
+			box-shadow var(--ease-duration) var(--ease-function);
+
+		&.show {
+			opacity: 1;
+
+			&:hover {
+				filter: brightness(0.95);
+				box-shadow: 0.2rem 0.3rem var(--br-color);
+
+				@media (prefers-color-scheme: dark) {
+					filter: invert() brightness(0.95);
+				}
+			}
+		}
+
+		& .natlog-content {
+			color: var(--fg-color);
+			font-size: 1.2rem;
+			font-family: var(--font-family);
+			word-break: break-all;
+		}
+
+		@media (prefers-color-scheme: dark) {
+			filter: invert();
+		}
+	}
+}

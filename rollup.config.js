@@ -1,7 +1,7 @@
-import del from "rollup-plugin-delete";
 import terser from "@rollup/plugin-terser";
-import typescript from "rollup-plugin-typescript2";
-// import { dts } from "rollup-plugin-dts";
+import delelet from "rollup-plugin-delete";
+import importcss from "rollup-plugin-import-css";
+import typescript2 from "rollup-plugin-typescript2";
 
 export default [
 	{
@@ -11,15 +11,14 @@ export default [
 			format: "esm",
 		},
 		plugins: [
-			del({ targets: "dist/" }),
-			typescript({
+			delelet({ targets: "dist/" }),
+			importcss({
+				minify: true,
+			}),
+			typescript2({
 				useTsconfigDeclarationDir: true,
 			}),
-			terser({
-				compress: {
-					unsafe: true,
-				},
-			}),
+			terser(),
 		],
 	},
 	{
@@ -30,14 +29,13 @@ export default [
 		},
 		watch: false,
 		plugins: [
-			typescript({
+			importcss({
+				minify: true,
+			}),
+			typescript2({
 				useTsconfigDeclarationDir: true,
 			}),
-			terser({
-				compress: {
-					unsafe: true,
-				},
-			}),
+			terser(),
 		],
 	},
 ];
