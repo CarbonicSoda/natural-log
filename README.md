@@ -1,13 +1,10 @@
-<h3 align="center" style="margin-bottom: -10px">
+<p align="center">
 	<img src="https://raw.githubusercontent.com/CarbonicSoda/natural-logs/master/media/icon.png" width="100" alt="Natural Logs Icon">
-	<p></p>
-	Natural Logs
-</h3>
-<h4 align="center">All-in-One Console and Popups</h4>
+</p>
+<h3 align="center">Natural Logs</h3>
+<p align="center">All-in-One Console and Popups</p>
 
 ---
-
-<h4 align="center">Ultimate Productivity Booster</h5>
 
 ### Usage
 
