@@ -17,7 +17,7 @@ export class LogItem {
 			} catch {
 				return details.index
 					? `[Circular], refer to natlog.history[${details.index}].`
-					: "[Circular], enable natlog history to inspect.";
+					: "[Circular], inspect in debug console or enable history.";
 			}
 		});
 		const sep = details.sep === "newline" ? "<br>" : " ";

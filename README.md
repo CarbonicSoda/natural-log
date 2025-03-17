@@ -26,10 +26,10 @@ Import the package and initialize:
 // index.tsx
 import { Natlog } from "natural-log";
 
-// Initialize
+// initialize
 new Natlog();
 
-// Or with options
+// or with options
 new Natlog({...});
 ```
 
@@ -43,7 +43,7 @@ popup will appear on your page!
 console.log("Hello World!");
 console.warn("Ouch");
 console.error({
-	cause: 69,
+  cause: 69,
 });
 ```
 
