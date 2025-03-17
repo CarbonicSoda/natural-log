@@ -134,7 +134,9 @@ export class Natlog {
 				popup.classList.remove("show");
 			};
 			const timeout = setTimeout(dispose, this.options.popupTimeout * 1000);
-			popup.onclick = dispose;
+			popup.onclick = () => {
+				if (!DomUtils.isTextSelected(popup)) dispose();
+			};
 		};
 	}
 }

@@ -43,7 +43,7 @@ popup will appear on your page!
 console.log("Hello World!");
 console.warn("Ouch");
 console.error({
-  cause: 69,
+	cause: 69,
 });
 ```
 
@@ -57,7 +57,8 @@ will still reach the debug console if you like to inspect it there)
 > The popups are responsive to device size and adaptive to the color scheme
 > (light/dark).
 
-The popups will fade after some time. To dismiss them, just hover and click.
+The popups will fade after some time. To dismiss them, just hover and click
+(will not dismiss if you selected text in it).
 
 ![Hover&Click](https://github.com/CarbonicSoda/natural-log/blob/master/media/demo/hover.png?raw=true)
 

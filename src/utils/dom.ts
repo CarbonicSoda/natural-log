@@ -28,4 +28,13 @@ export namespace DomUtils {
 
 		return element;
 	}
+
+	export function isTextSelected(element: HTMLElement): boolean {
+		const selection = window.getSelection();
+		return (
+			!!selection &&
+			selection.focusOffset - selection.anchorOffset !== 0 &&
+			selection.containsNode(element, true)
+		);
+	}
 }
