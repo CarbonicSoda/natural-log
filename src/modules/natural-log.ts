@@ -144,7 +144,7 @@ export class Natlog {
 			if (this.#popupDiv.childNodes.length > this.options.maxPopupCount) {
 				this.#popupDiv.removeChild(this.#popupDiv.childNodes[0]);
 			}
-			DomUtils.instantApply(popup, "show");
+			popup.classList.add("show");
 
 			const dispose = () => {
 				clearTimeout(timeout);

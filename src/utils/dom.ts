@@ -31,13 +31,6 @@ export namespace DomUtils {
 		return element;
 	}
 
-	//MO DOC instantly add class after a frame to trigger transition
-	export function instantApply(element: HTMLElement, className: string): void {
-		requestAnimationFrame(() =>
-			requestAnimationFrame(() => element.classList.add(className)),
-		);
-	}
-
 	//MO DOC check for text selection state
 	export function isTextSelected(element: HTMLElement): boolean {
 		const selection = window.getSelection();
