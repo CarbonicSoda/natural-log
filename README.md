@@ -54,8 +54,7 @@ gives you...
 Isn't that cool? Frees our hands from the debug console...! (Though the message
 will still reach the debug console if you like to inspect it there)
 
-> The popups are responsive to device size and adaptive to the color scheme
-> (light/dark).
+> The popups are responsive to device size.
 
 The popups will fade after some time. To dismiss them, just hover and click
 (will not dismiss if you selected text in it).
