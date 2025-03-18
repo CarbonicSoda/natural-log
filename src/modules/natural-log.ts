@@ -3,7 +3,6 @@ import { StylesRegistry } from "../styles/registry";
 import styles from "../styles/styles.css";
 
 import { DomUtils } from "../utils/dom";
-import { TimeUtils } from "../utils/time";
 
 import {
 	ConsoleMethod,
@@ -53,7 +52,7 @@ export class Natlog {
 
 	//MO DOC expose current timestamp in the same format as history
 	static get now(): string {
-		return TimeUtils.now(Natlog.options.timeOptions);
+		return new Date().toLocaleTimeString(undefined, Natlog.options.timeOptions);
 	}
 
 	constructor(options: Partial<NatlogOptions> = {}) {

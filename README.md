@@ -33,7 +33,7 @@ new Natlog();
 new Natlog({...});
 ```
 
-Available options are given in [configurations](#options).
+> Available options are given in [configurations](#options).
 
 Now, the next time console methods are called (even in the debug console), a
 popup will appear on your page!
@@ -64,6 +64,8 @@ The popups will fade after some time. To dismiss them, just hover and click
 The package allows you to store console history, and exposes it to the debug
 console via `natlog.history`.
 
+> All exposed properties are given in [exposed object](#exposed-natlog-object).
+
 On a production build? Not only can you toggle popups off, you can also mute all
 native console calls with ease.
 
@@ -89,7 +91,8 @@ All configuration options are given below.
 A `natlog` object is exposed to the debug console, and can be accessed directly
 without prefix.
 
-It contains the following properties.
+It contains the following properties useful for further references, e.g. when
+you logged a circular object (which the popup will give you a hint).
 
 | Property  | Description                                                     |
 | --------- | --------------------------------------------------------------- |
@@ -97,9 +100,6 @@ It contains the following properties.
 | _console_ | The native console (after configured mute) that will not popup. |
 | _history_ | The console history, if enabled.                                |
 | _now_     | The current timestamp formatted like in the console history.    |
-
-Useful for further references, e.g. when you logged a circular object (which the
-popup will give you a hint).
 
 #### End
 
