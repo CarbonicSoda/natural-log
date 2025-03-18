@@ -1,6 +1,6 @@
-import styles from "../styles/styles.css";
-import { StylesRegistry } from "../styles/registry";
 import "../styles/register";
+import { StylesRegistry } from "../styles/registry";
+import styles from "../styles/styles.css";
 
 import { DomUtils } from "../utils/dom";
 import { TimeUtils } from "../utils/time";
@@ -15,18 +15,21 @@ import {
 import { LogItem } from "./log-item";
 
 export class Natlog {
-	//MO REGISTRATION Registration location 2.
-	log(...items: any): void {
-		Natlog.#methodFactory("log")(items);
+	// Step 1 in types/types.ts
+	//MO REGISTRATION registration step 2, add corresponding methods
+	// Step 3 in styles/register.ts
+	log(logItem: LogItem): void {
+		Natlog.#methodFactory("log")(logItem);
 	}
-	warn(...items: any): void {
-		Natlog.#methodFactory("warn")(items);
+	warn(logItem: LogItem): void {
+		Natlog.#methodFactory("warn")(logItem);
 	}
-	error(...items: any): void {
-		Natlog.#methodFactory("error")(items);
+	error(logItem: LogItem): void {
+		Natlog.#methodFactory("error")(logItem);
 	}
 
-	static optionDefaults: NatlogOptions = {
+	//MO DOC fallback default options
+	static #optionDefaults: NatlogOptions = {
 		console: true,
 		popup: true,
 		maxPopupCount: 5,
@@ -40,69 +43,85 @@ export class Natlog {
 			fractionalSecondDigits: 3,
 		},
 	};
+	//MO DOC div that popups will reside
+	static #popupDiv: HTMLDivElement;
 
+	//MO DOC expose natlog options, original console (after mute) and console history
 	static options: NatlogOptions;
+	static console: Console;
 	static history: LogItem[] = [];
 
-	static $console: Console;
-	static $popupDiv: HTMLDivElement;
-
+	//MO DOC expose current timestamp in the same format as history
 	static get now(): string {
 		return TimeUtils.now(Natlog.options.timeOptions);
 	}
 
-	static isConsoleOn(method: ConsoleMethod): boolean {
-		return typeof this.options.console === "boolean"
-			? this.options.console === true
-			: this.options.console.includes(method);
-	}
-	static isPopupOn(method: ConsoleMethod): boolean {
-		return typeof this.options.popup === "boolean"
-			? this.options.popup === true &&
-					popupMethods.includes(method as PopupMethod)
-			: this.options.popup.includes(method as PopupMethod);
-	}
-	static get isHistoryOn(): boolean {
-		return this.options.history;
-	}
-
-	//MO DOC Singleton, only one instance should be constructed
 	constructor(options: Partial<NatlogOptions> = {}) {
-		Natlog.options = { ...Natlog.optionDefaults, ...options };
+		Natlog.options = { ...Natlog.#optionDefaults, ...options };
 
+		//MO DOC expose natlog to console
 		window.natlog = Natlog;
+
+		//MO DOC inject natlog css styles
 		if (Natlog.options.popup !== false) {
 			DomUtils.injectStyles(styles);
-			Natlog.$popupDiv = DomUtils.createAppend("div", {
+			Natlog.#popupDiv = DomUtils.createAppend("div", {
 				parent: document.body,
 				class: "natlog-injected",
 			});
 		}
 
+		//MO DOC mute excluded console methods
 		for (const _method of Object.keys(console)) {
 			const method = _method as ConsoleMethod;
-			if (!Natlog.isConsoleOn(method)) console[method] = () => void 0;
+			if (!Natlog.#isConsoleOn(method)) console[method] = () => void 0;
 		}
 
-		Natlog.$console = console;
+		//MO DOC hijack console
+		Natlog.console = console;
 		console = {} as Console;
-		for (const _method of Object.keys(Natlog.$console)) {
+
+		//MO DOC wrap natlog methods in history logger and override native console
+		for (const _method of Object.keys(Natlog.console)) {
 			const method = _method as ConsoleMethod;
-			const overrideMethod = method in this && Natlog.isPopupOn(method);
-			console[method] = overrideMethod
-				? (this[<keyof typeof this>method] as (...args: any) => any)
-				: Natlog.$console[method];
+			const overrideMethod = method in this && Natlog.#isPopupOn(method);
+
+			console[method] = (...args: any) => {
+				const logItem = new LogItem(method, Natlog.now, args);
+				if (Natlog.#isHistoryOn) Natlog.history.push(logItem);
+
+				if (!overrideMethod) {
+					(Natlog.console[method] as (...args: any) => any)(...args);
+					return;
+				}
+				(this[<keyof typeof this>method] as (logItem: LogItem) => any)(logItem);
+			};
 		}
 	}
 
-	static #methodFactory(method: ConsoleMethod): (args: any) => any {
-		return (args: any) => {
-			(this.$console[method] as (...args: any) => any)(...args);
+	//MO DOC enablement state getters
+	static #isConsoleOn(method: ConsoleMethod): boolean {
+		return typeof this.options.console === "boolean"
+			? this.options.console === true
+			: this.options.console.includes(method);
+	}
+	static #isPopupOn(method: ConsoleMethod): boolean {
+		return typeof this.options.popup === "boolean"
+			? this.options.popup === true &&
+					popupMethods.includes(method as PopupMethod)
+			: this.options.popup.includes(method as PopupMethod);
+	}
+	static get #isHistoryOn(): boolean {
+		return this.options.history;
+	}
 
-			const logItem = new LogItem(method, this.now, args);
-			if (this.isHistoryOn) this.history.push(logItem);
+	//MO DOC popup method factory
+	static #methodFactory(method: ConsoleMethod): (logItem: LogItem) => any {
+		return (logItem: LogItem) => {
+			const args = logItem._args;
 
-			if (!this.isPopupOn(method)) return;
+			(this.console[method] as (...args: any) => any)(...args);
+			if (!this.#isPopupOn(method)) return;
 
 			const colorVars = StylesRegistry.get(method);
 			const popup = DomUtils.createAppend("div", {
@@ -117,14 +136,14 @@ export class Natlog {
 				parent: popup,
 				class: "natlog-content",
 				html: logItem.toString({
-					index: this.isHistoryOn ? this.history.length - 1 : undefined,
+					index: this.#isHistoryOn ? this.history.length - 1 : undefined,
 					sep: this.options.popupSep,
 				}),
 			});
 
-			this.$popupDiv.appendChild(popup);
-			if (this.$popupDiv.childNodes.length > this.options.maxPopupCount) {
-				this.$popupDiv.removeChild(this.$popupDiv.childNodes[0]);
+			this.#popupDiv.appendChild(popup);
+			if (this.#popupDiv.childNodes.length > this.options.maxPopupCount) {
+				this.#popupDiv.removeChild(this.#popupDiv.childNodes[0]);
 			}
 			DomUtils.instantApply(popup, "show");
 

@@ -1,19 +1,27 @@
 import { ConsoleMethod } from "../types/types";
 
 export class LogItem {
+	//MO DOC flag, if args.length < 2 so I don't have to show it in array
+	#orphan: boolean;
+
 	constructor(
 		public method: ConsoleMethod,
 		public time: string,
-		public items: any[] | any,
+		public args: any[] | any,
 	) {
-		if (this.items.length === 1) this.items = this.items[0];
+		if ((this.#orphan = this.args.length < 2)) this.args = this.args[0];
 	}
 
+	get _args(): any[] {
+		return this.#orphan ? [this.args] : this.args;
+	}
+
+	//MO DOC stringify for popup content
 	toString(details: { index?: number; sep: "newline" | "space" }): string {
-		const strItems = [this.items].flat().map((item) => {
-			if (typeof item !== "object") return `${item}`;
+		const strArgs = this._args.map((arg) => {
+			if (typeof arg !== "object") return `${arg}`;
 			try {
-				return JSON.stringify(item, null, " ");
+				return JSON.stringify(arg, null, " ");
 			} catch {
 				return details.index
 					? `[Circular], refer to natlog.history[${details.index}].`
@@ -21,6 +29,6 @@ export class LogItem {
 			}
 		});
 		const sep = details.sep === "newline" ? "<br>" : " ";
-		return strItems.join(sep);
+		return strArgs.join(sep);
 	}
 }

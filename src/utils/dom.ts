@@ -1,8 +1,10 @@
 export namespace DomUtils {
+	//MO DOC inject css styles into page
 	export function injectStyles(styles: string): void {
 		document.head.insertAdjacentHTML("beforeend", `<style>${styles}</style>`);
 	}
 
+	//MO DOC shortcut method for DOM element creation/config
 	export function createAppend<T extends keyof HTMLElementTagNameMap>(
 		tag: T,
 		options?: {
@@ -29,12 +31,14 @@ export namespace DomUtils {
 		return element;
 	}
 
+	//MO DOC instantly add class after a frame to trigger transition
 	export function instantApply(element: HTMLElement, className: string): void {
 		requestAnimationFrame(() =>
 			requestAnimationFrame(() => element.classList.add(className)),
 		);
 	}
 
+	//MO DOC check for text selection state
 	export function isTextSelected(element: HTMLElement): boolean {
 		const selection = window.getSelection();
 		return (

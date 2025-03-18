@@ -1,6 +1,8 @@
 import { StylesRegistry } from "./registry";
 
-//MO REGISTRATION Registration location 3.
+// Step 1 in types/types.ts
+// Step 2 in modules/natural-log.ts
+//MO REGISTRATION registration step 3, set popups' background, foreground and border colors
 StylesRegistry.register("log", {
 	bg: "oklch(0.97 0 0)",
 	fg: "oklch(0.145 0 0)",
