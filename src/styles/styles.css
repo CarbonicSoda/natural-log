@@ -41,10 +41,6 @@
 			&:hover {
 				filter: brightness(0.95);
 				box-shadow: 0.2rem 0.3rem var(--br-color);
-
-				@media (prefers-color-scheme: dark) {
-					filter: invert() brightness(0.95);
-				}
 			}
 		}
 
@@ -53,10 +49,6 @@
 			font-size: 1.2rem;
 			font-family: var(--font-family);
 			word-break: break-all;
-		}
-
-		@media (prefers-color-scheme: dark) {
-			filter: invert();
 		}
 	}
 }

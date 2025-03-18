@@ -29,6 +29,12 @@ export namespace DomUtils {
 		return element;
 	}
 
+	export function instantApply(element: HTMLElement, className: string): void {
+		requestAnimationFrame(() =>
+			requestAnimationFrame(() => element.classList.add(className)),
+		);
+	}
+
 	export function isTextSelected(element: HTMLElement): boolean {
 		const selection = window.getSelection();
 		return (

@@ -11,8 +11,8 @@ import {
 	PopupMethod,
 	popupMethods,
 } from "../types/types";
+
 import { LogItem } from "./log-item";
-import { CssUtils } from "../utils/css";
 
 export class Natlog {
 	//MO REGISTRATION Registration location 2.
@@ -126,7 +126,7 @@ export class Natlog {
 			if (this.$popupDiv.childNodes.length > this.options.maxPopupCount) {
 				this.$popupDiv.removeChild(this.$popupDiv.childNodes[0]);
 			}
-			CssUtils.instant(popup, "show");
+			DomUtils.instantApply(popup, "show");
 
 			const dispose = () => {
 				clearTimeout(timeout);
