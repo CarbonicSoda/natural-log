@@ -46,7 +46,7 @@ export class Natlog {
 	//MO DOC div that popups will reside
 	static #popupDiv: HTMLDivElement;
 
-	//MO DOC expose natlog options, original console (after mute) and console history
+	//MO DOC expose natlog options, native console (after configured mute) and console history
 	static options: NatlogOptions;
 	static console: Console;
 	static history: LogItem[] = [];
