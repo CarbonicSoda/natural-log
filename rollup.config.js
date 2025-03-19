@@ -1,5 +1,6 @@
 import terser from "@rollup/plugin-terser";
 import delelet from "rollup-plugin-delete";
+import dts from "rollup-plugin-dts";
 import importcss from "rollup-plugin-import-css";
 import typescript2 from "rollup-plugin-typescript2";
 
@@ -37,5 +38,10 @@ export default [
 			}),
 			terser(),
 		],
+	},
+	{
+		input: "dist/types/index.d.ts",
+		output: [{ file: "dist/index.d.ts", format: "es" }],
+		plugins: [dts()],
 	},
 ];

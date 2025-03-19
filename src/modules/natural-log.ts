@@ -117,7 +117,7 @@ export class Natlog {
 	//MO DOC popup method factory
 	static #methodFactory(method: ConsoleMethod): (logItem: LogItem) => any {
 		return (logItem: LogItem) => {
-			const args = logItem._args;
+			const args = logItem.$args;
 
 			(this.console[method] as (...args: any) => any)(...args);
 			if (!this.#isPopupOn(method)) return;
