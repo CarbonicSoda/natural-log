@@ -28,7 +28,7 @@ export class LogItem {
 					: "[Circular], inspect in debug console or enable history.";
 			}
 		});
-		const sep = details.sep === "newline" ? " <br>" : " ";
+		const sep = details.sep === "newline" ? "<br>" : " ";
 		return strArgs.join(sep);
 	}
 }

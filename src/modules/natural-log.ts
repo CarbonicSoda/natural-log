@@ -32,7 +32,7 @@ export class Natlog {
 		console: true,
 		popup: true,
 		maxPopupCount: 5,
-		popupTimeout: 30,
+		popupTimeout: 20,
 		popupSep: "newline",
 		history: true,
 		timeOptions: {
@@ -62,7 +62,11 @@ export class Natlog {
 		window.natlog = Natlog;
 
 		//MO DOC inject natlog css styles
-		if (Natlog.options.popup !== false) {
+		if (
+			typeof Natlog.options.popup === "boolean"
+				? Natlog.options.popup
+				: Natlog.options.popup.length !== 0
+		) {
 			DomUtils.injectStyles(styles);
 			Natlog.#popupDiv = DomUtils.createAppend("div", {
 				parent: document.body,
