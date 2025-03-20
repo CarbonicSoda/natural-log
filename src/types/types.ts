@@ -1,10 +1,7 @@
-//MO REGISTRATION registration step 1, declare method
-// Step 2 in modules/natural-log.ts
-// Step 3 in styles/register.ts
-export const popupMethods = ["log", "warn", "error"] as const;
+import { POPUP_METHODS } from "../register";
 
 export type ConsoleMethod = keyof Console;
-export type PopupMethod = (typeof popupMethods)[number];
+export type PopupMethod = (typeof POPUP_METHODS)[number];
 
 export interface NatlogOptions {
 	console: boolean | ConsoleMethod[];
