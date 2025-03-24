@@ -37,7 +37,7 @@ export class Natlog {
 	static #options: NatlogOptions;
 
 	//MO DOC shadow root that popups will reside
-	static #popupRoot: HTMLDivElement;
+	static #popupRoot: ShadowRoot;
 
 	//MO DOC enablement state checkers
 	static #isConsoleOn(method: ConsoleMethod): boolean {
@@ -62,22 +62,18 @@ export class Natlog {
 		window.natlog = Natlog;
 
 		//MO DOC create shadow dom
-		let shadowRoot!: ShadowRoot;
 		if (
 			typeof Natlog.#options.popup === "boolean"
 				? Natlog.#options.popup
 				: Natlog.#options.popup.length !== 0
 		) {
 			//MO DOC inject natlog css styles
+			//MO TODO write a more lightweight version
 			DomUtils.loadFont("JetBrains Mono:300");
-			shadowRoot = DomUtils.createShadowDom(styles);
+			Natlog.#popupRoot = DomUtils.createShadowDom(styles);
 		} else {
-			shadowRoot = DomUtils.createShadowDom();
+			Natlog.#popupRoot = DomUtils.createShadowDom();
 		}
-		Natlog.#popupRoot = DomUtils.createAppend("div", {
-			parent: shadowRoot,
-			class: "wrapper",
-		});
 
 		//MO DOC mute excluded console methods
 		for (const consoleMethod of Object.keys(console)) {
