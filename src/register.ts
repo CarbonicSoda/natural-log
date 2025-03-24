@@ -1,7 +1,13 @@
 import { register } from "./registry/registry";
+import { ConsoleMethod } from "./types/types";
 
 //MO DOC insert registered method name
-export const POPUP_METHODS = ["log", "warn", "error", "debug"] as const;
+export const POPUP_METHODS = [
+	"log",
+	"warn",
+	"error",
+	"debug",
+] as const satisfies ConsoleMethod[];
 
 //MO DOC define method styles (background, foreground, border) and an optional args transform method
 register("log", {
