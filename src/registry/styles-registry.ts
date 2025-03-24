@@ -10,7 +10,7 @@ export namespace StylesRegistry {
 
 	const STYLES_REGISTRY: Map<ConsoleMethod, StyleOptions> = new Map();
 	const FALLBACK_STYLES: StyleOptions = {
-		bg: "#000",
+		bg: "#FFF",
 		fg: "#000",
 		br: "#000",
 	};

@@ -1,14 +1,39 @@
+import { default as WebFont } from "webfontloader";
+
 export namespace DomUtils {
-	//MO DOC inject css styles into page
-	export function injectStyles(styles: string): void {
-		document.head.insertAdjacentHTML("beforeend", `<style>${styles}</style>`);
+	//MO DOC create shadow dom with styles
+	export function createShadowDom(styles?: string): ShadowRoot {
+		customElements.define(
+			"natlog-root",
+			class NatlogRoot extends HTMLElement {
+				constructor() {
+					super();
+				}
+			},
+		);
+		const root = document.createElement("natlog-root");
+		document.body.appendChild(root);
+
+		const shadowRoot = root.attachShadow({ mode: "closed" });
+		shadowRoot.innerHTML = styles ? `<style>${styles}</style>` : "";
+
+		return shadowRoot;
+	}
+
+	//MO DOC load font into dom
+	export function loadFont(family: string): void {
+		WebFont.load({
+			google: {
+				families: [family],
+			},
+		});
 	}
 
 	//MO DOC shortcut method for DOM element creation/config
 	export function createAppend<T extends keyof HTMLElementTagNameMap>(
 		tag: T,
 		options?: {
-			parent?: HTMLElement;
+			parent?: HTMLElement | ShadowRoot;
 			class?: string | string[];
 			styles?: { [property: string]: any };
 			html?: string;
@@ -29,15 +54,5 @@ export namespace DomUtils {
 		if (options?.html) element.innerHTML = options.html;
 
 		return element;
-	}
-
-	//MO DOC check for text selection state
-	export function isTextSelected(element: HTMLElement): boolean {
-		const selection = window.getSelection();
-		return (
-			!!selection &&
-			selection.focusOffset - selection.anchorOffset !== 0 &&
-			selection.containsNode(element, true)
-		);
 	}
 }

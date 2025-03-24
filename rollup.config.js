@@ -1,3 +1,5 @@
+import commonjs from "@rollup/plugin-commonjs";
+import nodeResolve from "@rollup/plugin-node-resolve";
 import terser from "@rollup/plugin-terser";
 import deleter from "rollup-plugin-delete";
 import dts from "rollup-plugin-dts";
@@ -13,6 +15,8 @@ export default [
 		},
 		plugins: [
 			deleter({ targets: "dist/" }),
+			commonjs(),
+			nodeResolve(),
 			importcss({
 				minify: true,
 			}),
@@ -30,6 +34,8 @@ export default [
 		},
 		watch: false,
 		plugins: [
+			commonjs(),
+			nodeResolve(),
 			importcss({
 				minify: true,
 			}),

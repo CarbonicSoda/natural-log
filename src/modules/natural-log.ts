@@ -18,31 +18,26 @@ export class Natlog {
 
 	//MO DOC expose current timestamp in the same format as history
 	static get now(): string {
-		return new Date().toLocaleTimeString(
-			undefined,
-			Natlog.#options.timeOptions,
-		);
+		return new Date().toLocaleTimeString(undefined, {
+			hour: "2-digit",
+			minute: "2-digit",
+			second: "2-digit",
+			fractionalSecondDigits: 3,
+		});
 	}
 
 	//MO DOC fallback default options and config options
 	static readonly #DEFAULT_OPTIONS: NatlogOptions = {
 		console: true,
 		popup: true,
-		maxPopupCount: 5,
-		popupTimeout: 20,
-		popupSep: "newline",
+		maxPopup: 5,
+		timeout: 20,
 		history: true,
-		timeOptions: {
-			hour: "2-digit",
-			minute: "2-digit",
-			second: "2-digit",
-			fractionalSecondDigits: 3,
-		},
 	} as const;
 	static #options: NatlogOptions;
 
-	//MO DOC div that popups will reside
-	static #popupDiv: HTMLDivElement;
+	//MO DOC shadow root that popups will reside
+	static #popupRoot: HTMLDivElement;
 
 	//MO DOC enablement state checkers
 	static #isConsoleOn(method: ConsoleMethod): boolean {
@@ -66,19 +61,23 @@ export class Natlog {
 		//MO DOC expose natlog to console
 		window.natlog = Natlog;
 
-		//MO DOC inject natlog css styles
+		//MO DOC create shadow dom
+		let shadowRoot!: ShadowRoot;
 		if (
 			typeof Natlog.#options.popup === "boolean"
 				? Natlog.#options.popup
 				: Natlog.#options.popup.length !== 0
 		) {
-			//MO TODO consider using css modules
-			DomUtils.injectStyles(styles);
-			Natlog.#popupDiv = DomUtils.createAppend("div", {
-				parent: document.body,
-				class: "natlog-injected",
-			});
+			//MO DOC inject natlog css styles
+			DomUtils.loadFont("JetBrains Mono:300");
+			shadowRoot = DomUtils.createShadowDom(styles);
+		} else {
+			shadowRoot = DomUtils.createShadowDom();
 		}
+		Natlog.#popupRoot = DomUtils.createAppend("div", {
+			parent: shadowRoot,
+			class: "wrapper",
+		});
 
 		//MO DOC mute excluded console methods
 		for (const consoleMethod of Object.keys(console)) {
@@ -117,25 +116,30 @@ export class Natlog {
 
 			const styles = StylesRegistry.get(method);
 			const popup = DomUtils.createAppend("div", {
-				class: "natlog-popup",
+				class: "popup",
 				styles: {
-					"--bg-color": styles.bg,
-					"--fg-color": styles.fg,
-					"--br-color": styles.br,
+					"--bg": styles.bg,
+					"--fg": styles.fg,
+					"--br": styles.br,
 				},
 			});
+			//MO TODO abandon support for `html` for createAppend once omnires is completed
 			DomUtils.createAppend("p", {
 				parent: popup,
-				class: "natlog-content",
+				class: "content",
 				html: logItem.toString({
 					index: this.#isHistoryOn ? this.history.length - 1 : undefined,
-					sep: this.#options.popupSep,
 				}),
 			});
+			const dismisser = DomUtils.createAppend("div", {
+				parent: popup,
+				class: "action",
+				html: "+",
+			});
 
-			this.#popupDiv.appendChild(popup);
-			if (this.#popupDiv.childNodes.length > this.#options.maxPopupCount) {
-				this.#popupDiv.removeChild(this.#popupDiv.childNodes[0]);
+			this.#popupRoot.appendChild(popup);
+			if (this.#popupRoot.childNodes.length > this.#options.maxPopup) {
+				this.#popupRoot.removeChild(this.#popupRoot.childNodes[0]);
 			}
 			popup.classList.add("show");
 
@@ -144,10 +148,8 @@ export class Natlog {
 				popup.ontransitionend = popup.remove;
 				popup.classList.remove("show");
 			};
-			const timeout = setTimeout(dispose, this.#options.popupTimeout * 1000);
-			popup.onclick = () => {
-				if (!DomUtils.isTextSelected(popup)) dispose();
-			};
+			const timeout = setTimeout(dispose, this.#options.timeout * 1000);
+			dismisser.onclick = dispose;
 		};
 	}
 }

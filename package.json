@@ -19,7 +19,10 @@
 	"module": "dist/index.esm.js",
 	"types": "dist/index.d.ts",
 	"devDependencies": {
+		"@rollup/plugin-commonjs": "^28.0.3",
+		"@rollup/plugin-node-resolve": "^16.0.1",
 		"@rollup/plugin-terser": "^0.4.4",
+		"@types/webfontloader": "^1.6.38",
 		"rollup": "^4.35.0",
 		"rollup-plugin-delete": "^3.0.1",
 		"rollup-plugin-dts": "^6.2.0",
@@ -30,5 +33,8 @@
 	"scripts": {
 		"build": "rollup -c",
 		"watch": "rollup -c --watch"
+	},
+	"dependencies": {
+		"webfontloader": "^1.6.28"
 	}
 }

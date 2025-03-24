@@ -19,7 +19,8 @@ export class LogItem {
 	}
 
 	//MO DOC stringify for popup content
-	toString(details: { index?: number; sep: "newline" | "space" }): string {
+	//MO TODO overhaul after omnires completion, use divs instead of strings then
+	toString(details: { index?: number }): string {
 		const strArgs = this.argsArray.map((arg) => {
 			if (typeof arg !== "object") return `${arg}`;
 			try {
@@ -30,7 +31,6 @@ export class LogItem {
 					: "[Circular], refer to debug console or enable history.";
 			}
 		});
-		const sep = details.sep === "newline" ? "<br>" : " ";
-		return strArgs.join(sep);
+		return strArgs.join("<br>");
 	}
 }
