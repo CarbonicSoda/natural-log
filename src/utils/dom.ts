@@ -1,5 +1,3 @@
-import { default as WebFont } from "webfontloader";
-
 export namespace DomUtils {
 	//MO DOC create shadow dom with styles
 	export function createShadowDom(styles?: string): ShadowRoot {
@@ -18,15 +16,6 @@ export namespace DomUtils {
 		shadowRoot.innerHTML = styles ? `<style>${styles}</style>` : "";
 
 		return shadowRoot;
-	}
-
-	//MO DOC load font into dom
-	export function loadFont(family: string): void {
-		WebFont.load({
-			google: {
-				families: [family],
-			},
-		});
 	}
 
 	//MO DOC shortcut method for DOM element creation/config

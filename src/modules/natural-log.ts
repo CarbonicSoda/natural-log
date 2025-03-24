@@ -1,5 +1,7 @@
 import styles from "../styles/styles.css";
 
+import { loadGFont } from "gfont-loader";
+
 import { DomUtils } from "../utils/dom";
 
 import { ConsoleMethod, NatlogOptions, PopupMethod } from "../types/types";
@@ -67,9 +69,13 @@ export class Natlog {
 				? Natlog.#options.popup
 				: Natlog.#options.popup.length !== 0
 		) {
-			//MO DOC inject natlog css styles
-			//MO TODO write a more lightweight version
-			DomUtils.loadFont("JetBrains Mono:300");
+			//MO DOC load gfont
+			loadGFont({
+				family: "JetBrains Mono",
+				axis: {
+					wght: 300,
+				},
+			});
 			Natlog.#popupRoot = DomUtils.createShadowDom(styles);
 		} else {
 			Natlog.#popupRoot = DomUtils.createShadowDom();

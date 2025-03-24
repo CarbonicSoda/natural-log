@@ -1,7 +1,7 @@
 {
 	"name": "natural-log",
 	"author": "CarbonicSoda",
-	"version": "2.0.1-beta",
+	"version": "2.0.2-beta",
 	"description": "Console and Popups All in One",
 	"license": "MIT",
 	"repository": {
@@ -22,7 +22,6 @@
 		"@rollup/plugin-commonjs": "^28.0.3",
 		"@rollup/plugin-node-resolve": "^16.0.1",
 		"@rollup/plugin-terser": "^0.4.4",
-		"@types/webfontloader": "^1.6.38",
 		"rollup": "^4.35.0",
 		"rollup-plugin-delete": "^3.0.1",
 		"rollup-plugin-dts": "^6.2.0",
@@ -35,6 +34,14 @@
 		"watch": "rollup -c --watch"
 	},
 	"dependencies": {
-		"webfontloader": "^1.6.28"
+		"gfont-loader": "link:..\\gfont-loader"
+	},
+	"pnpm": {
+		"overrides": {
+			"gfont-loader": "link:..\\gfont-loader"
+		}
+	},
+	"publishConfig": {
+		"access": "public"
 	}
 }

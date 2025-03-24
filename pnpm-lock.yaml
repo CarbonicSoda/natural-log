@@ -4,13 +4,16 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
+overrides:
+  gfont-loader: link:..\gfont-loader
+
 importers:
 
   .:
     dependencies:
-      webfontloader:
-        specifier: ^1.6.28
-        version: 1.6.28
+      gfont-loader:
+        specifier: link:../gfont-loader
+        version: link:../gfont-loader
     devDependencies:
       '@rollup/plugin-commonjs':
         specifier: ^28.0.3
@@ -21,9 +24,6 @@ importers:
       '@rollup/plugin-terser':
         specifier: ^0.4.4
         version: 0.4.4(rollup@4.35.0)
-      '@types/webfontloader':
-        specifier: ^1.6.38
-        version: 1.6.38
       rollup:
         specifier: ^4.35.0
         version: 4.35.0
@@ -230,9 +230,6 @@ packages:
 
   '@types/resolve@1.20.2':
     resolution: {integrity: sha512-60BCwRFOZCQhDncwQdxxeOEEkbc5dIMccYLwbxsS4TUNeVECQ/pBJ0j09mrHOl/JJvpRPGwO9SvE4nR2Nb/a4Q==}
-
-  '@types/webfontloader@1.6.38':
-    resolution: {integrity: sha512-kUaF72Fv202suFx6yBrwXqeVRMx7hGtJTesyESZgn9sEPCUeDXm2p0SiyS1MTqW74nQP4p7JyrOCwZ7pNFns4w==}
 
   acorn@8.14.1:
     resolution: {integrity: sha512-OvQ/2pUDKmgfCg++xsTX1wGxfTaszcHVcTctW4UJB4hibJx2HXxxO5UmVgyjMa+ZDsiaf5wWLXYpRWMmBI0QHg==}
@@ -524,9 +521,6 @@ packages:
     resolution: {integrity: sha512-gptHNQghINnc/vTGIk0SOFGFNXw7JVrlRUtConJRlvaw6DuX0wO5Jeko9sWrMBhh+PsYAZ7oXAiOnf/UKogyiw==}
     engines: {node: '>= 10.0.0'}
 
-  webfontloader@1.6.28:
-    resolution: {integrity: sha512-Egb0oFEga6f+nSgasH3E0M405Pzn6y3/9tOVanv/DLfa1YBIgcv90L18YyWnvXkRbIM17v5Kv6IT2N6g1x5tvQ==}
-
 snapshots:
 
   '@babel/code-frame@7.26.2':
@@ -678,8 +672,6 @@ snapshots:
   '@types/estree@1.0.6': {}
 
   '@types/resolve@1.20.2': {}
-
-  '@types/webfontloader@1.6.38': {}
 
   acorn@8.14.1: {}
 
@@ -960,5 +952,3 @@ snapshots:
   unicorn-magic@0.3.0: {}
 
   universalify@2.0.1: {}
-
-  webfontloader@1.6.28: {}
