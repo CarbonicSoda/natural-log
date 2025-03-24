@@ -72,6 +72,7 @@ export class Natlog {
 				? Natlog.#options.popup
 				: Natlog.#options.popup.length !== 0
 		) {
+			//MO TODO consider using css modules
 			DomUtils.injectStyles(styles);
 			Natlog.#popupDiv = DomUtils.createAppend("div", {
 				parent: document.body,
