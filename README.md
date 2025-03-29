@@ -34,7 +34,7 @@ new Natlog();
 new Natlog({...});
 ```
 
-> Available options are given in [configurations](#options).
+> Available options are given in [Options](#options).
 
 Now, the next time console methods are called (even in the debug console), a
 popup will appear on your page!
@@ -59,7 +59,7 @@ gives you...
 ![Demo](https://github.com/CarbonicSoda/natural-log/blob/master/media/demo/demo.png?raw=true)
 
 > You can expand/collapse objects, arrays etc. all thanks to
-> [omnires](https://github.com/CarbonicSoda/omnires)!
+> [Omnires](https://github.com/CarbonicSoda/omnires)!
 
 > The popups are responsive to device size.
 
@@ -75,7 +75,7 @@ cross.
 The package allows you to store console history, and exposes it to the debug
 console via `natlog.history`.
 
-> All exposed properties are given in [exposed object](#exposed-natlog-object).
+> All exposed properties are given in [Exposed Object](#exposed-natlog-object).
 
 On a production build? Not only can you toggle popups off, you can also mute all
 native console calls with ease.
