@@ -16,6 +16,15 @@
 			"problemMatcher": [],
 			"label": "npm: watch",
 			"detail": "rollup -c --watch"
+		},
+		{
+			"type": "npm",
+			"script": "test",
+			"path": "test",
+			"group": "test",
+			"problemMatcher": [],
+			"label": "npm: test - test",
+			"detail": "vite"
 		}
 	]
 }

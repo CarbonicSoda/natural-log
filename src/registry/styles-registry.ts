@@ -4,14 +4,12 @@ import { ConsoleMethod } from "../types/types";
 export namespace StylesRegistry {
 	export type StyleOptions = {
 		bg: string;
-		fg: string;
 		br: string;
 	};
 
 	const STYLES_REGISTRY: Map<ConsoleMethod, StyleOptions> = new Map();
 	const FALLBACK_STYLES: StyleOptions = {
 		bg: "#FFF",
-		fg: "#000",
 		br: "#000",
 	};
 

@@ -1,6 +1,6 @@
 export namespace DomUtils {
-	//MO DOC create shadow dom with styles
-	export function createShadowDom(styles?: string): ShadowRoot {
+	//MO DOC create natlog root with styles
+	export function createRoot(styles?: string): HTMLElement {
 		customElements.define(
 			"natlog-root",
 			class NatlogRoot extends HTMLElement {
@@ -12,24 +12,25 @@ export namespace DomUtils {
 		const root = document.createElement("natlog-root");
 		document.body.appendChild(root);
 
-		const shadowRoot = root.attachShadow({ mode: "closed" });
-		shadowRoot.innerHTML = styles ? `<style>${styles}</style>` : "";
+		if (styles) {
+			document.head.insertAdjacentHTML("beforeend", `<style>${styles}</style>`);
+		}
 
-		return shadowRoot;
+		return root;
 	}
 
 	//MO DOC shortcut method for DOM element creation/config
 	export function createAppend<T extends keyof HTMLElementTagNameMap>(
 		tag: T,
 		options?: {
-			parent?: HTMLElement | ShadowRoot;
+			parent?: HTMLElement;
 			class?: string | string[];
 			styles?: { [property: string]: any };
-			html?: string;
+			text?: string;
+			wrap?: HTMLElement;
 		},
 	): HTMLElementTagNameMap[T] {
 		const element = document.createElement(tag);
-		options?.parent?.appendChild(element);
 
 		if (options?.class) {
 			if (typeof options.class === "string") element.className = options.class;
@@ -40,7 +41,10 @@ export namespace DomUtils {
 				element.style.setProperty(property, `${value}`);
 			}
 		}
-		if (options?.html) element.innerHTML = options.html;
+		if (options?.text) element.innerText = options.text;
+		if (options?.wrap) element.appendChild(options.wrap);
+
+		options?.parent?.appendChild(element);
 
 		return element;
 	}

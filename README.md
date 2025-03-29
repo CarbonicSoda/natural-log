@@ -1,7 +1,7 @@
-<p align="center">
-	<img src="https://raw.githubusercontent.com/CarbonicSoda/natural-log/master/media/icon.png" width="100" alt="Natural Log Icon">
-</p>
-<h3 align="center">Natural Log</h3>
+<h3 align="center">
+  <img src="https://raw.githubusercontent.com/CarbonicSoda/natural-log/master/media/icon.png" width="130" alt="Natural Log Icon" /><br />
+  Natural Log
+</h3>
 <p align="center">Console and Popups All in One</p>
 
 ---
@@ -40,19 +40,26 @@ Now, the next time console methods are called (even in the debug console), a
 popup will appear on your page!
 
 ```ts
-// demo.ts
-console.log("Hello World!");
-console.warn("Ouch");
-console.error({
+// example.ts
+
+console.log({
   cause: 69,
+  details: [null],
 });
 
-// other methods e.g. console.debug are also supported
+console.warn("FLAG", false);
+
+console.error(new SyntaxError("Brain Loss"));
+
+console.debug(new TextEncoder().encode("Hello World"));
 ```
 
 gives you...
 
 ![Demo](https://github.com/CarbonicSoda/natural-log/blob/master/media/demo/demo.png?raw=true)
+
+> You can expand/collapse objects, arrays etc. all thanks to
+> [omnires](https://github.com/CarbonicSoda/omnires)!
 
 > The popups are responsive to device size.
 

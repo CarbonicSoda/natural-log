@@ -5,4 +5,5 @@ dist/types
 media
 rollup.config.js
 src
+test
 tsconfig.json

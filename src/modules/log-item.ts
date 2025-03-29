@@ -17,20 +17,4 @@ export class LogItem {
 	get argsArray(): any[] {
 		return this.#orphan ? [this.args] : this.args;
 	}
-
-	//MO DOC stringify for popup content
-	//MO TODO overhaul after omnires completion, use divs instead of strings then
-	toString(details: { index?: number }): string {
-		const strArgs = this.argsArray.map((arg) => {
-			if (typeof arg !== "object") return `${arg}`;
-			try {
-				return JSON.stringify(arg, null, " ");
-			} catch {
-				return details.index
-					? `[Circular], refer to natlog.history[${details.index}].`
-					: "[Circular], refer to debug console or enable history.";
-			}
-		});
-		return strArgs.join("<br>");
-	}
 }

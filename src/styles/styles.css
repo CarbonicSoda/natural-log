@@ -1,4 +1,4 @@
-:host {
+natlog-root {
 	all: initial;
 	box-sizing: border-box;
 
@@ -8,15 +8,14 @@
 	z-index: calc(infinity);
 	position: fixed;
 	right: 1vw;
-	bottom: 1vh;
+	top: 1vh;
 	display: flex;
-	flex-direction: column;
+	flex-direction: column-reverse;
 
 	font-family: "JetBrains Mono", monospace;
 
-	& .popup {
+	& .natlog-popup {
 		--bg: #fff;
-		--fg: #000;
 		--br: #000;
 
 		display: flex;
@@ -28,34 +27,36 @@
 		border: var(--br) 2px solid;
 		border-radius: 10px;
 
-		opacity: 0;
+		opacity: 1;
 		background-color: var(--bg);
-		color: var(--fg);
 
 		transition: opacity var(--ease-duration) var(--ease-function),
-			filter var(--ease-duration) var(--ease-function),
 			box-shadow var(--ease-duration) var(--ease-function);
 
-		&.show {
-			opacity: 1;
+		&:hover {
+			box-shadow: 0.2rem 0.3rem var(--br);
+		}
 
-			&:hover {
-				filter: brightness(0.95);
-				box-shadow: 0.2rem 0.3rem var(--br);
+		& .natlog-content-box {
+			display: flex;
+			flex-direction: column;
+			padding: 0.8rem;
+
+			& .natlog-content {
+				margin: 0;
+
+				& .omni {
+					font-size: 1.2rem;
+					word-break: break-all;
+				}
 			}
 		}
 
-		& .content {
-			padding: 1rem;
-			margin: 0;
-
-			font-size: 1.2rem;
-			word-break: break-all;
-		}
-
-		& .action {
+		& .natlog-action {
 			rotate: 45deg;
 
+			margin-top: 0.25rem;
+			margin-bottom: auto;
 			margin-left: auto;
 			margin-right: 1rem;
 

@@ -1,15 +1,15 @@
 import styles from "../styles/styles.css";
 
 import { loadGFont } from "gfont-loader";
-
+import { wrap } from "omnires";
 import { DomUtils } from "../utils/dom";
 
 import { ConsoleMethod, NatlogOptions, PopupMethod } from "../types/types";
 
 import "../register";
 import { POPUP_METHODS } from "../register";
-import { TransformsRegistry } from "../registry/transforms-registry";
 import { StylesRegistry } from "../registry/styles-registry";
+import { TransformsRegistry } from "../registry/transforms-registry";
 
 import { LogItem } from "./log-item";
 
@@ -38,8 +38,8 @@ export class Natlog {
 	} as const;
 	static #options: NatlogOptions;
 
-	//MO DOC shadow root that popups will reside
-	static #popupRoot: ShadowRoot;
+	//MO DOC natlog root that popups will reside
+	static #root: HTMLElement;
 
 	//MO DOC enablement state checkers
 	static #isConsoleOn(method: ConsoleMethod): boolean {
@@ -63,7 +63,7 @@ export class Natlog {
 		//MO DOC expose natlog to console
 		window.natlog = Natlog;
 
-		//MO DOC create shadow dom
+		//MO DOC create natlog root
 		if (
 			typeof Natlog.#options.popup === "boolean"
 				? Natlog.#options.popup
@@ -72,13 +72,10 @@ export class Natlog {
 			//MO DOC load gfont
 			loadGFont({
 				family: "JetBrains Mono",
-				axis: {
-					wght: 300,
-				},
 			});
-			Natlog.#popupRoot = DomUtils.createShadowDom(styles);
+			Natlog.#root = DomUtils.createRoot(styles);
 		} else {
-			Natlog.#popupRoot = DomUtils.createShadowDom();
+			Natlog.#root = DomUtils.createRoot();
 		}
 
 		//MO DOC mute excluded console methods
@@ -94,9 +91,11 @@ export class Natlog {
 		//MO DOC wrap natlog methods in history logger and override native console
 		for (const consoleMethod of Object.keys(Natlog.console)) {
 			const method = consoleMethod as ConsoleMethod;
+
 			console[method] = (...args: any) => {
 				const transformed = TransformsRegistry.get(method)(args);
 				const logItem = new LogItem(method, Natlog.now, transformed);
+
 				if (Natlog.#isHistoryOn) Natlog.history.push(logItem);
 
 				if (Natlog.#isPopupOn(method)) {
@@ -114,41 +113,47 @@ export class Natlog {
 			const args = logItem.argsArray;
 
 			(this.console[method] as (...args: any) => any)(...args);
+
 			if (!this.#isPopupOn(method)) return;
 
 			const styles = StylesRegistry.get(method);
 			const popup = DomUtils.createAppend("div", {
-				class: "popup",
+				class: "natlog-popup",
 				styles: {
 					"--bg": styles.bg,
-					"--fg": styles.fg,
 					"--br": styles.br,
 				},
 			});
-			//MO TODO abandon support for `html` for createAppend once omnires is completed
-			DomUtils.createAppend("p", {
+
+			const contentBox = DomUtils.createAppend("div", {
 				parent: popup,
-				class: "content",
-				html: logItem.toString({
-					index: this.#isHistoryOn ? this.history.length - 1 : undefined,
-				}),
-			});
-			const dismisser = DomUtils.createAppend("div", {
-				parent: popup,
-				class: "action",
-				html: "+",
+				class: "natlog-content-box",
 			});
 
-			this.#popupRoot.appendChild(popup);
-			if (this.#popupRoot.childNodes.length > this.#options.maxPopup) {
-				this.#popupRoot.removeChild(this.#popupRoot.childNodes[0]);
+			for (const arg of args) {
+				const wrapper = wrap(arg);
+				DomUtils.createAppend("div", {
+					parent: contentBox,
+					wrap: wrapper,
+					class: "natlog-content",
+				});
 			}
-			popup.classList.add("show");
+
+			const dismisser = DomUtils.createAppend("div", {
+				parent: popup,
+				class: "natlog-action",
+				text: "+",
+			});
+
+			this.#root.appendChild(popup);
+
+			if (this.#root.childNodes.length > this.#options.maxPopup) {
+				this.#root.removeChild(this.#root.childNodes[0]);
+			}
 
 			const dispose = () => {
 				clearTimeout(timeout);
-				popup.ontransitionend = popup.remove;
-				popup.classList.remove("show");
+				popup.remove();
 			};
 			const timeout = setTimeout(dispose, this.#options.timeout * 1000);
 			dismisser.onclick = dispose;
