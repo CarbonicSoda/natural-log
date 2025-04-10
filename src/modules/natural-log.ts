@@ -1,6 +1,5 @@
 import styles from "../styles/styles.css";
 
-import { loadGFont } from "gfont-loader";
 import { wrap } from "omnires";
 import { DomUtils } from "../utils/dom";
 
@@ -68,19 +67,13 @@ export class Natlog {
 		window.natlog = Natlog;
 
 		//MO DOC create natlog root
-		if (
+		Natlog.#root = (
 			typeof Natlog.#options.popup === "boolean"
 				? Natlog.#options.popup
 				: Natlog.#options.popup.length !== 0
-		) {
-			//MO DOC load gfont
-			loadGFont({
-				family: "JetBrains Mono",
-			});
-			Natlog.#root = DomUtils.createRoot(styles);
-		} else {
-			Natlog.#root = DomUtils.createRoot();
-		}
+		)
+			? DomUtils.createRoot(styles)
+			: DomUtils.createRoot();
 
 		//MO DOC mute excluded console methods
 		for (const consoleMethod of Object.keys(console)) {
