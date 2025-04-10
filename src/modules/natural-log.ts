@@ -57,6 +57,10 @@ export class Natlog {
 		return this.#options.history;
 	}
 
+	/**
+	 * Initialize Natlog in your project.
+	 * @param options Refer to https://github.com/CarbonicSoda/natural-log/blob/master/README.md for usage.
+	 */
 	constructor(options: Partial<NatlogOptions> = {}) {
 		Natlog.#options = { ...Natlog.#DEFAULT_OPTIONS, ...options };
 
