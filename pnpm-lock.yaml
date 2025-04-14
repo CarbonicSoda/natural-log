@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       omnires:
-        specifier: ^1.0.10
-        version: 1.0.10
+        specifier: ^1.0.11
+        version: 1.0.11
     devDependencies:
       '@rollup/plugin-commonjs':
         specifier: ^28.0.3
@@ -304,8 +304,8 @@ packages:
   function-bind@1.1.2:
     resolution: {integrity: sha512-7XHNxH7qX9xG5mIwxkhumTox/MIRNcOgDrxWsMt2pAr23WHp6MrRlN7FBSFpCpr+oVO0F744iUgR82nJMfG2SA==}
 
-  gfont-loader@1.1.0:
-    resolution: {integrity: sha512-YDcRWrB56ADjEXxHul+YSj6c6w+0IkVlPJi8UfRAFt45PLnSKgyivm2GzrFXYWjqdWP7TdpAnTiq+ZsSssfAJQ==}
+  gfont-loader@1.2.1:
+    resolution: {integrity: sha512-LapLAceBjYQX31vMqMj0szMLR2r0pOqhLJyluKHQ/9aQyevqafLFGU8nf2Le70DWP+OxNA8//tid+wdC2yr2SA==}
 
   glob-parent@5.1.2:
     resolution: {integrity: sha512-AOIgSQCepiJYwP3ARnGx+5VnTu2HBYdzbGP45eLw1vr3zB3vZLeyed1sC9hnbcOc9/SrMyM5RPQrkGz4aS9Zow==}
@@ -386,8 +386,8 @@ packages:
     resolution: {integrity: sha512-PXwfBhYu0hBCPw8Dn0E+WDYb7af3dSLVWKi3HGv84IdF4TyFoC0ysxFd0Goxw7nSv4T/PzEJQxsYsEiFCKo2BA==}
     engines: {node: '>=8.6'}
 
-  omnires@1.0.10:
-    resolution: {integrity: sha512-ZHmc2G1eR6Tv08pwupBR3HI2xzcOeYAI/9hjum7SV0BL6RzpofyTLSOqfSmzDMGlYHG+86TivkJgxiHowQwl9A==}
+  omnires@1.0.11:
+    resolution: {integrity: sha512-ztYHg/i1YVt4quYUzLlrw0Abtzr9iZ/v47KYzG1+pfeGmEMxDj2Aa4qx2jQ4/rFLPufIO7n74dkKtpVXwn9ifg==}
 
   p-limit@2.3.0:
     resolution: {integrity: sha512-//88mFWSJx8lxCzwdAABTJL2MyWB12+eIY7MDL2SqLmAkeKU9qxRvWuSyTjm3FUmpBEMuFfckAIqEaVGUDxb6w==}
@@ -779,7 +779,7 @@ snapshots:
 
   function-bind@1.1.2: {}
 
-  gfont-loader@1.1.0: {}
+  gfont-loader@1.2.1: {}
 
   glob-parent@5.1.2:
     dependencies:
@@ -856,9 +856,9 @@ snapshots:
       braces: 3.0.3
       picomatch: 2.3.1
 
-  omnires@1.0.10:
+  omnires@1.0.11:
     dependencies:
-      gfont-loader: 1.1.0
+      gfont-loader: 1.2.1
       solid-js: 1.9.5
       solid-styled-components: 0.28.5(solid-js@1.9.5)
 
