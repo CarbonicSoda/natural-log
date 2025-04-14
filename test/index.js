@@ -10,3 +10,4 @@ console.log({
 console.warn("FLAG", false);
 console.error(new SyntaxError("Brain Loss"));
 console.debug(new TextEncoder().encode("Hello World"));
+console.log(console, 1)

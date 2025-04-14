@@ -40,7 +40,12 @@ natlog-root {
 		& .natlog-content-box {
 			display: flex;
 			flex-direction: column;
-			padding: 0.8rem;
+			overflow-y: auto;
+			overscroll-behavior-y: none;
+
+			max-height: 50vh;
+			padding: 0.5rem;
+			margin: 0.5rem;
 
 			& .natlog-content {
 				margin: 0;
@@ -55,7 +60,7 @@ natlog-root {
 		& .natlog-action {
 			rotate: 45deg;
 
-			margin-top: 0.25rem;
+			margin-top: 0.5rem;
 			margin-bottom: auto;
 			margin-left: auto;
 			margin-right: 1rem;
