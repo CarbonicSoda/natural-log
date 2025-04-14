@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       omnires:
-        specifier: ^1.0.9
-        version: 1.0.9
+        specifier: ^1.0.10
+        version: 1.0.10
     devDependencies:
       '@rollup/plugin-commonjs':
         specifier: ^28.0.3
@@ -386,8 +386,8 @@ packages:
     resolution: {integrity: sha512-PXwfBhYu0hBCPw8Dn0E+WDYb7af3dSLVWKi3HGv84IdF4TyFoC0ysxFd0Goxw7nSv4T/PzEJQxsYsEiFCKo2BA==}
     engines: {node: '>=8.6'}
 
-  omnires@1.0.9:
-    resolution: {integrity: sha512-5PID1UPWaeY4pQXGn9UP5mF/jn1RV0IQYJNxM7BvZCaDwDOg7MJ7r9vQ3mmhJMfXVbxwtJxmYnLbn86XR69/4A==}
+  omnires@1.0.10:
+    resolution: {integrity: sha512-ZHmc2G1eR6Tv08pwupBR3HI2xzcOeYAI/9hjum7SV0BL6RzpofyTLSOqfSmzDMGlYHG+86TivkJgxiHowQwl9A==}
 
   p-limit@2.3.0:
     resolution: {integrity: sha512-//88mFWSJx8lxCzwdAABTJL2MyWB12+eIY7MDL2SqLmAkeKU9qxRvWuSyTjm3FUmpBEMuFfckAIqEaVGUDxb6w==}
@@ -856,7 +856,7 @@ snapshots:
       braces: 3.0.3
       picomatch: 2.3.1
 
-  omnires@1.0.9:
+  omnires@1.0.10:
     dependencies:
       gfont-loader: 1.1.0
       solid-js: 1.9.5

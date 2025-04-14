@@ -68,6 +68,7 @@ natlog-root {
 			opacity: 0.5;
 			font-size: 2rem;
 
+			-webkit-user-select: none;
 			user-select: none;
 			cursor: pointer;
 

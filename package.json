@@ -1,7 +1,7 @@
 {
 	"name": "natural-log",
 	"author": "CarbonicSoda",
-	"version": "2.1.5",
+	"version": "2.1.6",
 	"description": "Console and Popups All in One",
 	"license": "MIT",
 	"repository": {
@@ -36,10 +36,11 @@
 	},
 	"scripts": {
 		"build": "rollup -c",
-		"watch": "rollup -c --watch"
+		"watch": "rollup -c --watch",
+		"prepublish": "rollup -c"
 	},
 	"dependencies": {
-		"omnires": "^1.0.9"
+		"omnires": "^1.0.10"
 	},
 	"publishConfig": {
 		"access": "public"
