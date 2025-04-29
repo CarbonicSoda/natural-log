@@ -152,8 +152,15 @@ export class Natlog {
 				clearTimeout(timeout);
 				popup.remove();
 			};
-			const timeout = setTimeout(dispose, this.#options.timeout * 1000);
 			dismisser.onclick = dispose;
+
+			let timeout = setTimeout(dispose, this.#options.timeout * 1000);
+			popup.onmouseenter = () => {
+				clearTimeout(timeout);
+			};
+			popup.onmouseleave = () => {
+				timeout = setTimeout(dispose, this.#options.timeout * 1000);
+			};
 		};
 	}
 }

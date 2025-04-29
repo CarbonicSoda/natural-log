@@ -1,7 +1,7 @@
 import { Natlog } from "natural-log";
 
 new Natlog({
-	timeout: 1000,
+	timeout: 5,
 });
 console.log({
 	cause: 69,

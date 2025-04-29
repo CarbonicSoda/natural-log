@@ -24,7 +24,7 @@
 			"group": "test",
 			"problemMatcher": [],
 			"label": "npm: test - test",
-			"detail": "vite"
+			"detail": "vite --host"
 		}
 	]
 }
