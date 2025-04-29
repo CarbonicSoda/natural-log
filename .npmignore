@@ -2,6 +2,7 @@
 .prettierrc
 .vscode
 dist/types
+eslint.config.mjs
 media
 rollup.config.js
 src
