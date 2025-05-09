@@ -31,7 +31,7 @@ export class Natlog {
 	static readonly #DEFAULT_OPTIONS: NatlogOptions = {
 		console: true,
 		popup: true,
-		maxPopup: 5,
+		maxPopup: "auto",
 		timeout: 20,
 		history: true,
 	} as const;
@@ -144,7 +144,16 @@ export class Natlog {
 
 			this.#root.appendChild(popup);
 
-			if (this.#root.childNodes.length > this.#options.maxPopup) {
+			const maxPopup =
+				this.#options.maxPopup === "auto"
+					? window.matchMedia("(width >= 64rem)").matches
+						? 5
+						: window.matchMedia("(width >= 48rem)").matches
+						? 3
+						: 1
+					: this.#options.maxPopup;
+
+			if (this.#root.childNodes.length > maxPopup) {
 				this.#root.removeChild(this.#root.childNodes[0]);
 			}
 

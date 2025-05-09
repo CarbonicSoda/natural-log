@@ -22,7 +22,6 @@ natlog-root {
 		align-items: center;
 		justify-content: space-between;
 
-		width: 35vw;
 		margin: 0.5rem;
 		border: var(--br) 2px solid;
 		border-radius: 10px;
@@ -78,5 +77,19 @@ natlog-root {
 				opacity: 0.8;
 			}
 		}
+	}
+}
+
+natlog-root .natlog-popup {
+	width: 50vw;
+}
+@media (width >= 48rem) {
+	natlog-root .natlog-popup {
+		width: 40vw;
+	}
+}
+@media (width >= 64rem) {
+	natlog-root .natlog-popup {
+		width: 35vw;
 	}
 }
