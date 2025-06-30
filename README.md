@@ -56,11 +56,9 @@ the cross.
 
 The package also stores console history, and exposes it to the debug console via `natlog.history`.
 
-> All exposed properties are given in [Exposed Object](#exposed-object).
+> Details on the exposed object in [Exposed Object](#exposed-object).
 
 #### Options
-
-> All properties have full Typescript autocompletion support and have straightforward values.
 
 | Property | Description                                                                                                                                                                                                                                                                   | Default |
 | -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------- |
