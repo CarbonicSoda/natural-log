@@ -7,7 +7,7 @@ nat-log {
 	z-index: calc(infinity);
 
 	display: flex;
-	flex-direction: column-reverse;
+	flex-direction: column;
 
 	font-family: "JetBrains Mono", monospace;
 }
