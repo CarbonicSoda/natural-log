@@ -25,99 +25,70 @@ Import the package and initialize:
 
 ```tsx
 // index.tsx
-import { Natlog } from "natural-log";
+import { natlog } from "natural-log";
 
-// initialize at top of file (recommended)
-new Natlog();
+// initialize
+natlog();
 
-// or with options
-new Natlog({...});
+// with options
+natlog({...});
 ```
 
 > Available options are given in [Options](#options).
 
-Now, the next time console methods are called (even in the debug console), a
-popup will appear on your page!
-
-```ts
-// example.ts
-
-console.log({
-  cause: 69,
-  details: [null],
-});
-
-console.warn("FLAG", false);
-
-console.error(new SyntaxError("Brain Loss"));
-
-console.debug(new TextEncoder().encode("Hello World"));
-```
-
-gives you...
+Now, the next time console methods are called (even in the debug console), prompts will appear on
+your page! Different console methods result in different prompt colors, too.
 
 ![Demo](https://github.com/CarbonicSoda/natural-log/blob/master/media/demo/demo.png?raw=true)
 
 > You can expand/collapse objects, arrays etc. all thanks to
 > [Omnires](https://github.com/CarbonicSoda/omnires)!
 
-> The popups are responsive to device size.
+> The prompts are responsive with regards to device size.
 
 Isn't that cool? Frees our hands from the debug console...!  
-(Though the message will still reach the debug console if you like to inspect it
-there)
+(Though the message will still reach the debug console, if you like to inspect it there)
 
-The popups will fade after some time if not being inspected. To dismiss them
-manually, just hit the cross.
+The prompts would fade after some time if not being inspected. To dismiss them manually, just hit
+the cross.
 
 ![Dismiss](https://github.com/CarbonicSoda/natural-log/blob/master/media/demo/dismiss.png?raw=true)
 
-The package allows you to store console history, and exposes it to the debug
-console via `natlog.history`.
+The package also stores console history, and exposes it to the debug console via `natlog.history`.
 
-> All exposed properties are given in [Exposed Object](#exposed-natlog-object).
-
-On a production build? Not only can you toggle popups off, you can also mute all
-native console calls with ease.
-
-All configuration options are given below.
+> All exposed properties are given in [Exposed Object](#exposed-object).
 
 #### Options
 
-> All properties have full Typescript autocompletion support and have
-> straightforward values.
+> All properties have full Typescript autocompletion support and have straightforward values.
 
-| Property   | Description                                                                                                                                                                                                                                                                                                             | Default |
-| ---------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------- |
-| _console_  | A boolean or an array of strings defining the log level, where boolean is toggle all.<br><br>For instance, `["log", "error"]` will mute all other console methods except `console.log` and `console.error`.<br><br>For production builds you can set it to e.g. `false` or `["error"]` to mute certain console methods. | `true`  |
-| _popup_    | Same as options.console except it configures popups instead.<br><br>Currently, the methods supported are limited, but you can contribute and register new methods in `src/register.ts` easily.                                                                                                                          | `true`  |
-| _maxPopup_ | How many popups can be shown on the page at the same time. If exceeds this number, the oldest one present would be removed.                                                                                                                                                                                             | `5`     |
-| _timeout_  | How long a popup would last before fading away if not being inspected, measured in seconds.                                                                                                                                                                                                                             | `20`    |
-| _history_  | Toggles console history on or off.<br><br>If on, the console history can be accessed via the debug console variable `natlog.history` (along with some other information) even if console is muted.<br><br>For production builds, set to `false` for performance.                                                        | `true`  |
+| Property | Description                                                                                                                                                                                                                                                                   | Default |
+| -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------- |
+| console  | Boolean or array of method names defining the log level.<br>For instance, `["log", "error"]` will mute all other console methods except `console.log` and `console.error`.<br>For production builds you can set it to `false` or `["error"]` to mute certain console methods. | `true`  |
+| prompts  | Same as `options.console` except it configures prompts instead.                                                                                                                                                                                                               | `true`  |
+| history  | Toggle console history.<br>If on, the console history can be accessed via the debug console variable `natlog.history`, even if methods are muted.<br>For production builds, set to `false` for performance.                                                                   | `true`  |
+| timeout  | Duration a prompt would last before fading away in seconds, if the prompt is not being inspected.                                                                                                                                                                             | `20`    |
+| maximum  | Number of prompts that could be shown on the page at the same time.<br>The oldest prompt present would be removed if the number exceeds the maximum.                                                                                                                          | `5`     |
 
-#### Exposed `natlog` Object
+#### Exposed Object
 
-A `natlog` object is exposed to the debug console, and can be accessed directly
-without prefix.
+A `natlog` object is exposed to the debug console which could be accessed directly.
 
-It contains the following properties useful for further references, e.g. when
-you logged a circular object (which the popup will give you a hint).
+It contains the following useful properties.
 
-| Property  | Description                                                                |
-| --------- | -------------------------------------------------------------------------- |
-| _history_ | The console history, if enabled.                                           |
-| _now_     | The current time formatted in the same format used in the console history. |
-| _console_ | The native console (after your mute) that will not trigger popups.         |
+| Property | Description                                                      |
+| -------- | ---------------------------------------------------------------- |
+| options  | The resolved natural-log options.                                |
+| console  | The native console after muting which would not trigger prompts. |
+| history  | The console history stack, if history is enabled in options.     |
+| now()    | The current timestamp in the same format as history entries.     |
+| root     | The natural-log root prompts element.                            |
 
-#### End
+#### Notes
 
-The main use case is debugging on phones/tablets without access to the debug
-console (assuming you are not using an emulator).
-
-Though this is still very useful for PC since animations with GSAP etc. may lag
-the hell out of the debug console.
+The package is mainly for debugging on phones and tablets, or when the debug console is lagging like
+hell because of GSAP etc.
 
 ---
 
-_&emsp;So who told you console hijacking is a bad idea...?_  
-_&emsp;&emsp;You thought it's the maths one?_
+_&emsp;You thought it's the maths one?_
