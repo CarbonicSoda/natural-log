@@ -27,6 +27,12 @@ const runtime: Runtime = {
 	root: root(),
 };
 
+/**
+ * Initialize natural-log in your web application.
+ *
+ * @param options
+ * refer to [readme#options](https://github.com/CarbonicSoda/natural-log/tree/master?tab=readme-ov-file#options).
+ */
 export function natlog(options?: Partial<Options>): void {
 	window.natlog = runtime;
 	Object.assign(runtime.options, options);
