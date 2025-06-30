@@ -1,16 +1,16 @@
-import { ConsoleMethod } from "../types/types";
+import { Method } from "../types/method";
 
-import { TransformsRegistry } from "./transforms-registry";
-import { StylesRegistry } from "./styles-registry";
+export interface Style {
+	bg: string;
+	br: string;
+}
 
-//MO DOC shortcut for registries
-export function register(
-	method: ConsoleMethod,
-	options?: {
-		transform?: TransformsRegistry.ArgsTransformer;
-		styles?: StylesRegistry.StyleOptions;
-	},
-): void {
-	TransformsRegistry.register(method, options?.transform);
-	StylesRegistry.register(method, options?.styles);
+const registry = new Map<Method, Style>();
+
+export function regStyle(method: Method, style: Style): void {
+	registry.set(method, style);
+}
+
+export function getStyle(method: Method): Style {
+	return registry.get(method) ?? { bg: "#000", br: "#000" };
 }

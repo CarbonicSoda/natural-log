@@ -3,7 +3,10 @@ import deletePlugin from "rollup-plugin-delete";
 import resolvePlugin from "@rollup/plugin-node-resolve";
 import terserPlugin from "@rollup/plugin-terser";
 import dtsPlugin from "rollup-plugin-dts";
+import cssPlugin from "rollup-plugin-import-css";
 import ts2Plugin from "rollup-plugin-typescript2";
+
+import { transform } from "lightningcss";
 
 export default [
 	{
@@ -15,6 +18,7 @@ export default [
 
 			ts2Plugin({ useTsconfigDeclarationDir: true }),
 			resolvePlugin(),
+			cssPlugin({ transform: minifyCss }),
 
 			terserPlugin(),
 		],
@@ -28,6 +32,7 @@ export default [
 		plugins: [
 			ts2Plugin({ useTsconfigDeclarationDir: true }),
 			resolvePlugin(),
+			cssPlugin({ transform: minifyCss }),
 
 			terserPlugin(),
 		],
@@ -43,3 +48,7 @@ export default [
 		watch: true,
 	},
 ];
+
+function minifyCss(raw) {
+	return transform({ code: Buffer.from(raw), minify: true }).code.toString();
+}

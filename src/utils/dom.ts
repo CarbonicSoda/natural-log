@@ -1,51 +1,38 @@
-export namespace DomUtils {
-	//MO DOC create natlog root with styles
-	export function createRoot(styles?: string): HTMLElement {
-		customElements.define(
-			"natlog-root",
-			class NatlogRoot extends HTMLElement {
-				constructor() {
-					super();
-				}
-			},
-		);
-		const root = document.createElement("natlog-root");
-		document.body.appendChild(root);
+export interface CreateOptions extends ElementCreationOptions {
+	class: string;
+	style: Record<string, string>;
 
-		if (styles) {
-			document.head.insertAdjacentHTML("beforeend", `<style>${styles}</style>`);
-		}
+	content: string | Node;
+	parent: Node;
+}
 
-		return root;
+export function create<T extends keyof HTMLElementTagNameMap>(
+	tag: T,
+	options?: Partial<CreateOptions>,
+): HTMLElementTagNameMap[T] {
+	const ele = document.createElement(tag, options);
+
+	if (options?.class) {
+		ele.className = options.class;
 	}
 
-	//MO DOC shortcut method for DOM element creation/config
-	export function createAppend<T extends keyof HTMLElementTagNameMap>(
-		tag: T,
-		options?: {
-			parent?: HTMLElement;
-			class?: string | string[];
-			styles?: { [property: string]: any };
-			text?: string;
-			wrap?: HTMLElement;
-		},
-	): HTMLElementTagNameMap[T] {
-		const element = document.createElement(tag);
-
-		if (options?.class) {
-			if (typeof options.class === "string") element.className = options.class;
-			else element.classList.add(...options.class);
+	if (options?.style) {
+		for (const [prop, value] of Object.entries(options.style)) {
+			ele.style.setProperty(prop, value);
 		}
-		if (options?.styles) {
-			for (const [property, value] of Object.entries(options.styles)) {
-				element.style.setProperty(property, `${value}`);
-			}
-		}
-		if (options?.text) element.innerText = options.text;
-		if (options?.wrap) element.appendChild(options.wrap);
-
-		options?.parent?.appendChild(element);
-
-		return element;
 	}
+
+	if (options?.content) {
+		ele.append(options.content);
+	}
+
+	if (options?.parent) {
+		options.parent.appendChild(ele);
+	}
+
+	return ele;
+}
+
+export function stylize(styles: string): void {
+	document.head.insertAdjacentHTML("beforeend", `<style>${styles}</style>`);
 }
