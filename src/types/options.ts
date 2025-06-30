@@ -6,6 +6,6 @@ export interface Options {
 
 	history: boolean;
 
-	maximum: "auto" | number;
-	timeout: "auto" | number;
+	timeout: number;
+	maximum: number;
 }

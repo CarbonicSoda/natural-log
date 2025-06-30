@@ -1,99 +1,79 @@
-/* MO TODO rework all css */
-
 nat-log {
 	all: initial;
-	box-sizing: border-box;
 
-	--ease-duration: 0.2s;
-	--ease-function: ease-out;
-
-	z-index: calc(infinity);
 	position: fixed;
-	right: 1vw;
-	top: 1vh;
+	top: 0;
+	right: 0;
+	z-index: calc(infinity);
+
 	display: flex;
 	flex-direction: column-reverse;
 
 	font-family: "JetBrains Mono", monospace;
+}
 
-	& .natlog-popup {
-		--bg: #fff;
-		--br: #000;
-
-		display: flex;
-		align-items: center;
-		justify-content: space-between;
-
-		margin: 0.5rem;
-		border: var(--br) 2px solid;
-		border-radius: 10px;
-
-		opacity: 1;
-		background-color: var(--bg);
-
-		transition:
-			opacity var(--ease-duration) var(--ease-function),
-			box-shadow var(--ease-duration) var(--ease-function);
-
-		&:hover {
-			box-shadow: 0.2rem 0.3rem var(--br);
-		}
-
-		& .natlog-content-box {
-			display: flex;
-			flex-direction: column;
-			overflow-y: auto;
-			overscroll-behavior-y: none;
-
-			width: 90%;
-			max-height: 50vh;
-			padding: 0.5rem;
-			margin: 0.5rem;
-
-			& .natlog-content {
-				margin: 0;
-
-				& .omni {
-					font-size: 1.2rem;
-					word-break: break-all;
-				}
-			}
-		}
-
-		& .natlog-action {
-			rotate: 45deg;
-
-			margin-top: 0.5rem;
-			margin-bottom: auto;
-			margin-left: auto;
-			margin-right: 1rem;
-
-			opacity: 0.5;
-			font-size: 2rem;
-
-			-webkit-user-select: none;
-			user-select: none;
-			cursor: pointer;
-
-			transition: opacity var(--ease-duration) var(--ease-function);
-
-			&:hover {
-				opacity: 0.8;
-			}
-		}
+nat-log {
+	width: 15rem;
+}
+@media screen and (width >= 40rem) {
+	nat-log {
+		width: 20rem;
+	}
+}
+@media screen and (width >= 48rem) {
+	nat-log {
+		width: 25rem;
 	}
 }
 
-natlog-root .natlog-popup {
-	width: 50vw;
-}
-@media (width >= 48rem) {
-	natlog-root .natlog-popup {
-		width: 40vw;
+nat-log .nl-prompt {
+	--bg: ;
+	--br: ;
+
+	position: relative;
+
+	margin: 0.5rem;
+	background-color: var(--bg);
+
+	border: var(--br) 2px solid;
+	border-radius: 10px;
+
+	transition: box-shadow 0.2s ease-out;
+
+	&:hover {
+		box-shadow: 2px 2px var(--br);
 	}
 }
-@media (width >= 64rem) {
-	natlog-root .natlog-popup {
-		width: 35vw;
+
+nat-log .nl-prompt .nl-content {
+	display: flex;
+	flex-direction: column;
+	gap: 0.2rem;
+
+	width: 85%;
+	margin-block: 0.5rem;
+	margin-inline: 0.7rem;
+	max-height: 10rem;
+
+	overflow-y: auto;
+	overscroll-behavior-y: none;
+}
+
+nat-log .nl-prompt .nl-dismiss {
+	position: absolute;
+	top: 0;
+	right: 0.5rem;
+
+	rotate: 45deg;
+	font-size: 1.5rem;
+	color: oklch(55.6% 0 0);
+
+	cursor: pointer;
+	user-select: none;
+
+	transition: color 0.2s ease-out;
+
+	&:hover {
+		color: oklch(37.1% 0 0);
 	}
 }

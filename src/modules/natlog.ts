@@ -1,4 +1,4 @@
-import { wrap } from "omnires";
+import { render } from "omnires";
 import { getStyle } from "../registry/registry";
 import { default as styles } from "../styles/styles.css";
 import { Log } from "../types/log";
@@ -16,8 +16,8 @@ const runtime: Runtime = {
 
 		history: true,
 
-		maximum: "auto",
-		timeout: "auto",
+		timeout: 20,
+		maximum: 5,
 	},
 
 	console: window.console,
@@ -79,48 +79,41 @@ function promptFactory(method: Method): (log: Log) => void {
 
 	return (log) => {
 		const prompt = create("div", {
-			class: "natlog-popup",
+			class: "nl-prompt",
 			style: { "--bg": styles.bg, "--br": styles.br },
 		});
 
-		const content = create("div", { parent: prompt, class: "natlog-content-box" });
+		const content = create("div", { class: "nl-content", parent: prompt });
 
 		for (const arg of log.args) {
-			const omni = wrap(arg);
-
-			create("div", { parent: content, content: omni, class: "natlog-content" });
+			render(arg, content);
 		}
 
-		// const dismisser = DomUtils.createAppend("div", {
-		// 	parent: popup,
-		// 	class: "natlog-action",
-		// 	text: "+",
-		// });
+		const dismiss = create("div", {
+			class: "nl-dismiss",
+			content: "+",
+			parent: prompt,
+		});
+
+		dismiss.addEventListener("click", () => {
+			prompt.remove();
+		});
+
+		const fade = () => {
+			if (prompt.matches(":hover")) {
+				setTimeout(fade, runtime.options.timeout * 1000);
+
+				return;
+			}
+
+			prompt.remove();
+		};
+		setTimeout(fade, runtime.options.timeout * 1000);
+
+		if (runtime.root.children.length === runtime.options.maximum) {
+			runtime.root.firstChild?.remove();
+		}
 
 		runtime.root.appendChild(prompt);
-
-		// const maxPopup =
-		// 	this.#options.maxPopup === "auto"
-		// 		? window.matchMedia("(width >= 64rem)").matches
-		// 			? 5
-		// 			: window.matchMedia("(width >= 48rem)").matches
-		// 				? 3
-		// 				: 1
-		// 		: this.#options.maxPopup;
-		// if (this.#root.childNodes.length > maxPopup) {
-		// 	this.#root.removeChild(this.#root.childNodes[0]);
-		// }
-		// const dispose = () => {
-		// 	clearTimeout(timeout);
-		// 	popup.remove();
-		// };
-		// dismisser.onclick = dispose;
-		// let timeout = setTimeout(dispose, this.#options.timeout * 1000);
-		// popup.onmouseenter = () => {
-		// 	clearTimeout(timeout);
-		// };
-		// popup.onmouseleave = () => {
-		// 	timeout = setTimeout(dispose, this.#options.timeout * 1000);
-		// };
 	};
 }
