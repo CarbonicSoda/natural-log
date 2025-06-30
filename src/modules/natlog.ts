@@ -61,7 +61,7 @@ export function natlog(options?: Partial<Options>): void {
 
 	if (
 		Array.isArray(runtime.options.prompts)
-			? runtime.options.prompts.length
+			? runtime.options.prompts.length !== 0
 			: runtime.options.prompts
 	) {
 		stylize(styles);
@@ -93,6 +93,10 @@ function promptFactory(method: Method): (log: Log) => void {
 
 		for (const arg of log.args) {
 			render(arg, content);
+		}
+
+		if (log.args.length === 0) {
+			render(undefined, content);
 		}
 
 		const dismiss = create("div", {
