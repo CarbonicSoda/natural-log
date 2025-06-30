@@ -54,7 +54,7 @@ nat-log .nl-prompt .nl-content {
 	width: calc(100% - 2.5rem);
 	margin-block: 0.5rem;
 	margin-inline: 0.7rem;
-	max-height: 12rem;
+	max-height: 15rem;
 
 	overflow-y: auto;
 	overscroll-behavior-y: none;
