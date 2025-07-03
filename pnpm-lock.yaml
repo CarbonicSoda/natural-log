@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       omnires:
-        specifier: ^2.0.1
-        version: 2.0.1
+        specifier: ^2.2.0
+        version: 2.2.0
     devDependencies:
       '@eslint/js':
         specifier: ^9.30.1
@@ -796,8 +796,8 @@ packages:
   natural-compare@1.4.0:
     resolution: {integrity: sha512-OWND8ei3VtNC9h7V60qff3SVobHr996CTwgxubgyQYEpg290h9J0buyECNNJexkFm5sOajh5G116RYA1c8ZMSw==}
 
-  omnires@2.0.1:
-    resolution: {integrity: sha512-+tgWNZopKuRe6lS/5GrnDuT1/tMoPO++b34cWiRBy7csIHCFGVYUvNyw1bAx3Bcnoz1Jdf07uHv9JFaP3Xh/Eg==}
+  omnires@2.2.0:
+    resolution: {integrity: sha512-Saitm5nUUEa8L+3RJUq1h2zoGfc9nQcYhvUYtuiqlrUQsDnNUgx8lfa+jGl/yFXHcEycys0gdIucz0tJdCXcvA==}
 
   optionator@0.9.4:
     resolution: {integrity: sha512-6IpQ7mKUxRcZNLIObR0hz7lxsapSSIYNZJwXPGeF0mTVqGKFIXj1DQcMoT22S3ROcLyY/rz0PWaWZ9ayWmad9g==}
@@ -1758,7 +1758,7 @@ snapshots:
 
   natural-compare@1.4.0: {}
 
-  omnires@2.0.1:
+  omnires@2.2.0:
     dependencies:
       lightningcss: 1.30.1
       solid-js: 1.9.7
