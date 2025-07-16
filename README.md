@@ -70,7 +70,8 @@ The package also stores console history, and exposes it to the debug console via
 
 #### Exposed Object
 
-A `natlog` object is exposed to the debug console which could be accessed directly.
+A `natlog` object is exposed to the debug console which could be accessed directly. The same object
+is also returned by the `natlog()` initializer.
 
 It contains the following useful properties.
 

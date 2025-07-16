@@ -32,8 +32,10 @@ const runtime: Runtime = {
  *
  * @param options
  * refer to [readme#options](https://github.com/CarbonicSoda/natural-log/tree/master?tab=readme-ov-file#options).
+ *
+ * @returns natural-log runtime object
  */
-export function natlog(options?: Partial<Options>): void {
+export function natlog(options?: Partial<Options>): Runtime {
 	window.natlog = runtime;
 	Object.assign(runtime.options, options);
 
@@ -66,6 +68,8 @@ export function natlog(options?: Partial<Options>): void {
 	) {
 		stylize(styles);
 	}
+
+	return runtime;
 }
 
 function queryConsole(method: Method): boolean {
