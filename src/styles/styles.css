@@ -71,6 +71,7 @@ nat-log .nl-prompt .nl-dismiss {
 
 	cursor: pointer;
 	user-select: none;
+	-webkit-user-select: none;
 
 	transition: color 0.2s ease-out;
 
